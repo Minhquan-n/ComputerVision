@@ -15,16 +15,14 @@ save = False
 stream = True
 conf = 0.2
 target_size = (128, 128)
-model_path = 'models/vgg16_model.h5'
-# img_test_path = 'test4.jpg'
+# model_path = 'models/vgg16_model.h5'
+# model_path = 'models/mobilenet_model.h5'
+model_path = 'models/inceptionV3_model.h5'
 
 # Load model YOLOv8 custom
 yolo = YOLO('models/yolov8-custom.pt')
 # Load model du doan
 model = keras.models.load_model(model_path)
-# Load anh du doan
-# img = cv2.imread(img_test_path)
-# img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
 
 # Detect tren video
 cap = cv2.VideoCapture('test_vid.mp4')
@@ -49,6 +47,8 @@ while True:
             predict = model.predict(img_preprocessed)
             labels_idx = np.argmax(predict, axis=1)
             label = categories[labels_idx[0]]
+            if label == 'EMPTY':
+                continue
             # Ve bounding box voi ma bien bien bao
             cv2.rectangle(frame, (int(x1), int(y1)), (int(x2), int(y2)), (0, 255, 0), 2)
             font = cv2.FONT_HERSHEY_SIMPLEX
