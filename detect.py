@@ -16,12 +16,14 @@ stream = True
 conf = 0.2
 target_size = (128, 128)
 # model_path = 'models/vgg16_model.h5'
-# model_path = 'models/mobilenet_model.h5'
-model_path = 'models/inceptionV3_model.h5'
+model_path = 'models/mobilenet_model.h5'
+# model_path = 'models/inceptionV3_model.h5'
 
 # Load model YOLOv8 custom
+print('YOLO...')
 yolo = YOLO('models/yolov8-custom.pt')
 # Load model du doan
+print('CNN...')
 model = keras.models.load_model(model_path)
 
 # Detect tren video
